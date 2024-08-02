@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./QuickLinks.css";
 import Button from "@mui/material/Button";
 import AddNewDoctorModal from "../Modals/AddNewDoctorForm";
+import AddNewPatientModal from "../Modals/AddNewPatientModal";
 const QuickLinks = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleClose = () => setModalOpen(false);
@@ -58,6 +59,13 @@ const QuickLinks = () => {
       <div>
         {persona === "Doctor" && (
           <AddNewDoctorModal
+            open={modalOpen}
+            handleClose={handleClose}
+            type={persona}
+          />
+        )}
+        {persona === "Patient" && (
+          <AddNewPatientModal
             open={modalOpen}
             handleClose={handleClose}
             type={persona}

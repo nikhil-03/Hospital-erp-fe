@@ -7,15 +7,8 @@ interface FormValue {
   handleClose: () => void;
   type: string;
 }
-const specializations = [
-  // will create api for this
-  "Cardiology",
-  "Neurology",
-  "Orthopedics",
-  "Pediatrics",
-  "Dermatology",
-];
-const AddNewDoctorModal: React.FC<FormValue> = ({
+
+const AddNewPatientModal: React.FC<FormValue> = ({
   open,
   handleClose,
   type,
@@ -25,21 +18,23 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
     email: "",
     age: "",
     mobile: "",
-    experience: "",
-    specialisation: "default",
-    shift: "default",
-    availibility: "",
+    adharNumber: "",
+    gender: "default",
+    bloodGroup: "",
+    pincode: "",
     description: "",
   });
-  const handleFormChange = (
+  const handleFormValueChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+
+    // console.log("name: ", name, " value : ", value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    console.log("Final : ", formData);
+    console.log("Output : ", formData);
   };
   return (
     <div>
@@ -64,75 +59,65 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
                   name="username"
                   id="username"
                   placeholder="Full Name"
-                  onChange={handleFormChange}
+                  onChange={handleFormValueChange}
                 />
                 <input
                   type="text"
                   name="email"
                   id="email"
                   placeholder="Email Address"
-                  onChange={handleFormChange}
+                  onChange={handleFormValueChange}
                 />
                 <input
                   type="number"
                   name="age"
                   id="age"
                   placeholder="Age"
-                  onChange={handleFormChange}
+                  onChange={handleFormValueChange}
                 />
                 <input
                   type="mobile"
                   name="mobile"
                   id="mobile"
                   placeholder="Mobile"
-                  onChange={handleFormChange}
+                  onChange={handleFormValueChange}
                 />
               </div>
               <div>
                 <input
-                  type="number"
-                  name="experience"
-                  id="experience"
-                  placeholder="Experience"
-                  onChange={handleFormChange}
+                  type="text"
+                  name="adharNumber"
+                  id="adhar-no"
+                  placeholder="Adhar Number"
+                  onChange={handleFormValueChange}
                 />
-                <select
-                  id="specialisation"
-                  name="specialisation"
-                  value={formData.specialisation}
-                  onChange={handleFormChange}
-                >
-                  <option value="default" disabled>
-                    Select a Specialization
-                  </option>
-                  {specializations.map((specialization, index) => (
-                    <option key={index} value={specialization}>
-                      {specialization}
-                    </option>
-                  ))}
-                </select>
 
                 <select
-                  id="shift"
-                  name="shift"
-                  value={formData.shift}
-                  onChange={handleFormChange}
+                  id="gender"
+                  name="gender"
+                  value="default"
+                  onChange={handleFormValueChange}
                 >
                   <option value="default" disabled>
-                    Select a Shift
+                    Select Gender
                   </option>
-                  <option value="10:00-14:00">D : 10:00-14:00</option>
-                  <option value="14:00-18:00">D : 14:00-18:00</option>
-                  <option value="18:00-20:00">D : 18:00-20:00</option>
-                  <option value="20:00-24:00">D : 20:00-24:00</option>
-                  <option value="00:00-10:00">N : 00:00-10:00</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="mix">Others</option>
                 </select>
                 <input
-                  type="availibility"
-                  name="availibility"
-                  id="availibility"
-                  placeholder="Availibility"
-                  onChange={handleFormChange}
+                  type="text"
+                  name="bloodGroup"
+                  id="blood-group"
+                  placeholder="Blood Group"
+                  onChange={handleFormValueChange}
+                />
+                <input
+                  type="number"
+                  name="pincode"
+                  id="pincode"
+                  placeholder="PINCODE"
+                  onChange={handleFormValueChange}
                 />
               </div>
             </div>
@@ -141,13 +126,11 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
               name="description"
               id="description"
               placeholder="Description"
-              onChange={handleFormChange}
+              onChange={handleFormValueChange}
             />
+
             <div className="signup-form-login-btn">
-              <button className="btn">
-                {" "}
-                <a href="succes.html"> Add</a>
-              </button>
+              <button className="btn">Add</button>
             </div>
           </div>
         </div>
@@ -156,4 +139,4 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
   );
 };
 
-export default AddNewDoctorModal;
+export default AddNewPatientModal;

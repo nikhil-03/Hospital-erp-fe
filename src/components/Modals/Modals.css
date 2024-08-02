@@ -82,14 +82,6 @@ input:focus {
   opacity: 1;
 }
 
-.signup span {
-  color: #7fb8e6;
-}
-
-.signup span::hover {
-  color: #3793df;
-}
-
 a {
   text-decoration: none;
 }

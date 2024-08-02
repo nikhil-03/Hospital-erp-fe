@@ -5,7 +5,7 @@ import Root from "./pages/Root/Root";
 import DoctorLandingPage from "./pages/DoctorLandingPage/DoctorLandingPage";
 import AccountsPage from "./pages/AccountsPage/AccountsPage";
 import AppointmentPage from "./pages/AppointmentPage/AppointmentPage";
-import DashboardPage from "./pages/DashBoardPage/DashBoardPage";
+// import DashboardPage from "./pages/DashBoardPage/DashBoardPage";
 import DiagnosisPage from "./pages/DiagnosisPage/DiagnosisPage";
 import MedicalStorePage from "./pages/MedicalStorePage/MedicalStorePage";
 import PatientPage from "./pages/PatientsPage/PatientsPage";
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashboardPage />,
+        element: <LandingPage />,
       },
       {
         path: "/diagnosis",
