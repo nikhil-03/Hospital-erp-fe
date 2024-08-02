@@ -13,7 +13,8 @@
 .button-div:hover {
   background-color: #f6f5f5;
   border-color: azure;
-  margin: 13px 30px;
+  border: 2px;
+  backdrop-filter: blur(10px);
   color: #45474b;
 }
 .quick-link-button {
