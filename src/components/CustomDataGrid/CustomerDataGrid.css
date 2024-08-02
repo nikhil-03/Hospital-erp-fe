@@ -1,0 +1,10 @@
+.search-container {
+  background-color: white;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+.doctor-description-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}

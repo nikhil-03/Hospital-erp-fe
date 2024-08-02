@@ -1,0 +1,11 @@
+.landing-cards {
+  background-color: #f6f5f5 !important;
+  margin: 0px 50px;
+  border: 1px solid !important;
+  border-color: #758694 !important;
+  box-shadow: 5px 5px 5px #758694 !important;
+}
+.landing-cards:hover {
+  border-color: #686d76 !important;
+  box-shadow: 5px 5px 5px #686d76 !important;
+}

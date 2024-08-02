@@ -1,0 +1,17 @@
+.tiles-container {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-rows: 2fr 2fr 2fr;
+  align-items: center;
+  gap: 1rem;
+}
+.tiles {
+  padding: 4px !important;
+  background-color: #eeedeb !important;
+}
+.landing-container {
+  display: grid;
+  grid-template-columns: 0.5fr 8fr 1.5fr;
+  background-color: #eeedeb;
+  margin-top: 30px;
+}

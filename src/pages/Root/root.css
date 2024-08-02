@@ -1,0 +1,13 @@
+.landing-container {
+  display: grid;
+  grid-template-columns: 0.5fr 8fr 1fr;
+  background-color: #eeedeb;
+  margin-top: 30px;
+  height: 80vh;
+}
+body {
+  background-color: #eeedeb !important;
+}
+.landing-container > div {
+  overflow-y: auto; /* Allow scrolling if the content exceeds the height */
+}

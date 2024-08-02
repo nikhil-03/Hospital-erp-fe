@@ -1,0 +1,18 @@
+.navbar-container {
+  background-color: #050c9c !important;
+}
+.shortcuts-container {
+  display: flex;
+  justify-content: flex-end;
+}
+/* 5356FF */
+.logo-link {
+  color: white;
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}

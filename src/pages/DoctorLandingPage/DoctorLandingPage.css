@@ -1,0 +1,12 @@
+.doctor-list-container {
+  margin: 20px;
+}
+.breadcrumb {
+  color: black !important;
+  margin-left: 20px !important;
+  margin-top: 10px !important;
+  font-size: 0.75rem !important;
+}
+.breadcrumb:hover {
+  color: blue !important;
+}

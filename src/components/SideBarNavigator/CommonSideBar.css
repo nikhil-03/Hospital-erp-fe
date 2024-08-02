@@ -1,0 +1,12 @@
+.commonsidebar-container {
+  background-color: #050c9c;
+  color: white;
+  border-radius: 0 20px 20px 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-icons {
+  margin: 20px 5px 15px 5px;
+  text-align: center;
+}

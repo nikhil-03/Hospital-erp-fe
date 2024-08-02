@@ -1,0 +1,31 @@
+.quicklinks-container {
+  background-color: #050c9c;
+  color: black;
+  border-radius: 20px 0px 0 20px !important;
+}
+
+.button-div {
+  background-color: aliceblue;
+  margin: 15px 15px;
+  border-radius: 20px;
+  text-align: center;
+}
+.button-div:hover {
+  background-color: #f6f5f5;
+  border-color: azure;
+  margin: 13px 30px;
+  color: #45474b;
+}
+.quick-link-button {
+  line-height: 1.75 !important;
+  font-size: 0.65rem !important;
+  color: #050c9c !important;
+}
+.quick-link-button:hover {
+  color: #45474b !important;
+  /* background-color: #808d7c !important; */
+}
+.quick-links-heading {
+  color: aliceblue;
+  text-align: center;
+}

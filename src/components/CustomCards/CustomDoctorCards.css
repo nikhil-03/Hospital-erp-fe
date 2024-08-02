@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.container .card {
+  position: relative;
+  width: 15rem;
+  height: 20rem;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 2rem;
+  box-shadow: 0 2rem 4.5rem rgba(0, 0, 0, 0.3);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+.card-image {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(0, 0, 0, 0.25);
+}
+.card-image img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+.content h3 {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+.content p {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.other-information-container {
+  display: flex;
+}
+/* Media Queries  */
+@media (width <= 350px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media (width <= 320px) {
+  html {
+    font-size: 50%;
+  }
+}
+/* -doctor-description */
+.container-doctor-description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.container-doctor-description .card-doctor-description {
+  position: relative;
+  width: 35rem;
+  height: 20rem;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 2rem;
+  box-shadow: 0 2rem 4.5rem rgba(0, 0, 0, 0.3);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+}
+
+.content-doctor-description h3 {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+.content-doctor-description p {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.doctor-des-row {
+  margin: 5px 0 5px 20px;
+}
