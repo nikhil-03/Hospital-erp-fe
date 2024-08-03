@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./Modals.css";
 import { Modal } from "@mui/material";
+import useAxios from "../../hooks/useAxios";
+import { PATIENT_APIs } from "../../Apis/apiController";
 
 interface FormValue {
   open: boolean;
@@ -13,15 +15,27 @@ const AddNewPatientModal: React.FC<FormValue> = ({
   handleClose,
   type,
 }) => {
+  const { request } = useAxios();
+  const handleSubmit = () => {
+    request({
+      url: PATIENT_APIs,
+      method: "POST",
+      data: formData,
+    }).then((res) => {
+      console.log(res);
+      handleClose();
+    });
+  };
   const [formData, setFormData] = useState({
-    username: "",
+    user: "",
     email: "",
     age: "",
-    mobile: "",
-    adharNumber: "",
+    mobileNo: "",
+    adharNo: "",
     gender: "default",
     bloodGroup: "",
-    pincode: "",
+    pinCode: "",
+    address: "",
     description: "",
   });
   const handleFormValueChange = (
@@ -56,7 +70,7 @@ const AddNewPatientModal: React.FC<FormValue> = ({
               <div>
                 <input
                   type="text"
-                  name="username"
+                  name="name"
                   id="username"
                   placeholder="Full Name"
                   onChange={handleFormValueChange}
@@ -76,17 +90,24 @@ const AddNewPatientModal: React.FC<FormValue> = ({
                   onChange={handleFormValueChange}
                 />
                 <input
-                  type="mobile"
-                  name="mobile"
+                  type="text"
+                  name="mobileNo"
                   id="mobile"
                   placeholder="Mobile"
+                  onChange={handleFormValueChange}
+                />
+                <input
+                  type="text"
+                  name="description"
+                  id="description"
+                  placeholder="Description"
                   onChange={handleFormValueChange}
                 />
               </div>
               <div>
                 <input
                   type="text"
-                  name="adharNumber"
+                  name="adharNo"
                   id="adhar-no"
                   placeholder="Adhar Number"
                   onChange={handleFormValueChange}
@@ -95,7 +116,7 @@ const AddNewPatientModal: React.FC<FormValue> = ({
                 <select
                   id="gender"
                   name="gender"
-                  value="default"
+                  value={formData.gender}
                   onChange={handleFormValueChange}
                 >
                   <option value="default" disabled>
@@ -114,23 +135,25 @@ const AddNewPatientModal: React.FC<FormValue> = ({
                 />
                 <input
                   type="number"
-                  name="pincode"
+                  name="pinCode"
                   id="pincode"
                   placeholder="PINCODE"
                   onChange={handleFormValueChange}
                 />
+                <input
+                  type="text"
+                  name="address"
+                  id="address"
+                  placeholder="Address"
+                  onChange={handleFormValueChange}
+                />
               </div>
             </div>
-            <input
-              type="description"
-              name="description"
-              id="description"
-              placeholder="Description"
-              onChange={handleFormValueChange}
-            />
 
             <div className="signup-form-login-btn">
-              <button className="btn">Add</button>
+              <button onClick={handleSubmit} className="btn">
+                Add
+              </button>
             </div>
           </div>
         </div>

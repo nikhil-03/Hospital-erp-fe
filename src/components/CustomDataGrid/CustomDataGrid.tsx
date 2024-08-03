@@ -8,18 +8,11 @@ import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import CustomDoctorDescription from "../CustomCards/CustomDoctorDescription";
-interface DataRow {
-  name: string;
-  age: number;
-  specialization: string;
-  experience: number; // or any other relevant fields
-  contact: string;
-  availability: string[]; // Array of days
-  timings: string; // e.g., "9 AM - 5 PM"
-  description: string; // Additional information
-  email: string; // Email address
-}
+import { DataRow } from "../../Interfaces/interfaces";
 
+interface CustomDataGridProps {
+  data: DataRow[];
+}
 const columns: TableColumn<DataRow>[] = [
   {
     name: "Name",
@@ -39,67 +32,9 @@ const columns: TableColumn<DataRow>[] = [
   },
   {
     name: "Contact",
-    selector: (row) => row.contact,
+    selector: (row) => row.contactNo,
   },
   // Add more columns as needed
-];
-
-const data: DataRow[] = [
-  {
-    name: "Dr. John Doe",
-    age: 45,
-    specialization: "Cardiology",
-    experience: 20,
-    contact: "123-456-7890",
-    availability: ["Monday", "Wednesday", "Friday"], // Availability days
-    timings: "9 AM - 5 PM",
-    description: "Experienced cardiologist with a focus on heart diseases.",
-    email: "johndoe@example.com",
-  },
-  {
-    name: "Dr. Jane Smith",
-    age: 38,
-    specialization: "Neurology",
-    experience: 15,
-    contact: "234-567-8901",
-    availability: ["Tuesday", "Thursday"],
-    timings: "10 AM - 4 PM",
-    description: "Specializes in brain disorders and neurological conditions.",
-    email: "janesmith@example.com",
-  },
-  {
-    name: "Dr. Emily Johnson",
-    age: 50,
-    specialization: "Orthopedics",
-    experience: 25,
-    contact: "345-678-9012",
-    availability: ["Monday", "Tuesday", "Thursday"],
-    timings: "8 AM - 3 PM",
-    description: "Expert in bone and joint surgeries.",
-    email: "emilyjohnson@example.com",
-  },
-  {
-    name: "Dr. Michael Brown",
-    age: 42,
-    specialization: "Pediatrics",
-    experience: 18,
-    contact: "456-789-0123",
-    availability: ["Wednesday", "Friday"],
-    timings: "9 AM - 6 PM",
-    description: "Dedicated pediatrician with a passion for child health.",
-    email: "michaelbrown@example.com",
-  },
-  {
-    name: "Dr. Sarah Wilson",
-    age: 36,
-    specialization: "Dermatology",
-    experience: 12,
-    contact: "567-890-1234",
-    availability: ["Monday", "Thursday"],
-    timings: "11 AM - 5 PM",
-    description: "Focused on skin disorders and cosmetic dermatology.",
-    email: "sarahwilson@example.com",
-  },
 ];
 
 const ExpandedComponent: React.FC<ExpanderComponentProps<DataRow>> = ({
@@ -114,7 +49,7 @@ const ExpandedComponent: React.FC<ExpanderComponentProps<DataRow>> = ({
   );
 };
 
-function CustomDataGrid() {
+function CustomDataGrid({ data }: CustomDataGridProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [doctorDataList] = useState(data);
   const [filteredDoctorList, setFilteredDoctorList] = useState(data);
@@ -123,7 +58,7 @@ function CustomDataGrid() {
   };
 
   useEffect(() => {
-    const filterdata = doctorDataList.filter((doctor) => {
+    const filterdata = doctorDataList?.filter((doctor) => {
       return _.includes(doctor.name.toLowerCase(), searchTerm.toLowerCase());
     });
     setFilteredDoctorList(filterdata);

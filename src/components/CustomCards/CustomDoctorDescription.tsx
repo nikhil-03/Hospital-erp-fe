@@ -1,18 +1,8 @@
+import { DataRow } from "../../Interfaces/interfaces";
 import "./CustomDoctorCards.css";
 
-interface DoctorProps {
-  name: string;
-  age: number;
-  specialization: string;
-  experience: number;
-  contact: string;
-  availability: string[]; // Array of days
-  timings: string; // e.g., "9 AM - 5 PM"
-  description: string; // Additional information
-  email: string; // Email address
-}
 interface CustomDoctorDescriptionProps {
-  props: DoctorProps;
+  props: DataRow;
 }
 const CustomDoctorDescription: React.FC<CustomDoctorDescriptionProps> = ({
   props,
@@ -34,11 +24,11 @@ const CustomDoctorDescription: React.FC<CustomDoctorDescriptionProps> = ({
             <div className="doctor-des-row">
               Experience : {props.experience}
             </div>
-            <div className="doctor-des-row">Contact : {props.contact}</div>
+            <div className="doctor-des-row">Contact : {props.contactNo}</div>
             <div className="doctor-des-row">
-              Availability : {props.availability}
+              {/* Availability : {props.availability} */}
             </div>
-            <div className="doctor-des-row">Timings : {props.timings}</div>
+            {/* <div className="doctor-des-row">Timings : {props.timings}</div> */}
             <div className="doctor-des-row">Email : {props.email}</div>
             <div className="doctor-des-row">
               Description : {props.description}

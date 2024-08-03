@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./Modals.css";
-import { Modal } from "@mui/material";
+import { Checkbox, Modal } from "@mui/material";
+import useAxios from "../../hooks/useAxios";
+import { DOCTOR_APIs } from "../../Apis/apiController";
 
 interface FormValue {
   open: boolean;
@@ -20,17 +22,75 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
   handleClose,
   type,
 }) => {
-  const [formData, setFormData] = useState({
-    username: "",
+  const { request } = useAxios<any>();
+
+  const handleSubmitForm = async () => {
+    await request({
+      url: DOCTOR_APIs,
+      data: formData,
+      method: "POST",
+    }).then(() => {
+      handleClose();
+    });
+  };
+  interface FormData {
+    name: string;
+    email: string;
+    age: string;
+    contactNo: string;
+    experience: string;
+    specialization: string;
+    inTiming: string;
+    outTiming: string;
+    description: string;
+    availability: Availability[];
+  }
+  const daysOfWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const initialFormData: FormData = {
+    name: "",
     email: "",
     age: "",
-    mobile: "",
+    contactNo: "",
     experience: "",
-    specialisation: "default",
-    shift: "default",
-    availibility: "",
+    specialization: "default",
+    inTiming: "",
+    outTiming: "",
     description: "",
-  });
+    availability: daysOfWeek.map((day) => ({ dayOfWeek: day })),
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
+  interface Availability {
+    dayOfWeek: string;
+  }
+  const handleDaysChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const { name, checked } = event.target;
+    setFormData((prevFormData) => {
+      let updatedAvailability: Availability[] = [...prevFormData.availability];
+      if (checked) {
+        updatedAvailability.push({ dayOfWeek: name });
+      } else {
+        updatedAvailability = updatedAvailability.filter(
+          (day) => day.dayOfWeek !== name
+        );
+      }
+      return {
+        ...prevFormData,
+        availability: updatedAvailability,
+      };
+    });
+    console.log("Final : ", formData);
+  };
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -39,6 +99,7 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
       ...prevData,
       [name]: value,
     }));
+
     console.log("Final : ", formData);
   };
   return (
@@ -58,10 +119,10 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
           <div className="signup-form-box">
             <h1 className="form-heading">Add New {type}</h1>
             <div className="signup-form-user">
-              <div>
+              <div className="input-left-container">
                 <input
                   type="text"
-                  name="username"
+                  name="name"
                   id="username"
                   placeholder="Full Name"
                   onChange={handleFormChange}
@@ -80,11 +141,14 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
                   placeholder="Age"
                   onChange={handleFormChange}
                 />
+
                 <input
-                  type="mobile"
-                  name="mobile"
-                  id="mobile"
-                  placeholder="Mobile"
+                  type="time"
+                  id="appt"
+                  name="inTiming"
+                  placeholder="In-Time"
+                  value={formData.inTiming}
+                  className="clock clock-in"
                   onChange={handleFormChange}
                 />
               </div>
@@ -96,10 +160,17 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
                   placeholder="Experience"
                   onChange={handleFormChange}
                 />
+                <input
+                  type="mobile"
+                  name="contactNo"
+                  id="mobile"
+                  placeholder="Mobile"
+                  onChange={handleFormChange}
+                />
                 <select
-                  id="specialisation"
-                  name="specialisation"
-                  value={formData.specialisation}
+                  id="specialization"
+                  name="specialization"
+                  value={formData.specialization}
                   onChange={handleFormChange}
                 >
                   <option value="default" disabled>
@@ -112,26 +183,13 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
                   ))}
                 </select>
 
-                <select
-                  id="shift"
-                  name="shift"
-                  value={formData.shift}
-                  onChange={handleFormChange}
-                >
-                  <option value="default" disabled>
-                    Select a Shift
-                  </option>
-                  <option value="10:00-14:00">D : 10:00-14:00</option>
-                  <option value="14:00-18:00">D : 14:00-18:00</option>
-                  <option value="18:00-20:00">D : 18:00-20:00</option>
-                  <option value="20:00-24:00">D : 20:00-24:00</option>
-                  <option value="00:00-10:00">N : 00:00-10:00</option>
-                </select>
                 <input
-                  type="availibility"
-                  name="availibility"
-                  id="availibility"
-                  placeholder="Availibility"
+                  type="time"
+                  id="appt"
+                  name="outTiming"
+                  placeholder="In-Time"
+                  value={formData.outTiming}
+                  className="clock clock-out"
                   onChange={handleFormChange}
                 />
               </div>
@@ -143,10 +201,88 @@ const AddNewDoctorModal: React.FC<FormValue> = ({
               placeholder="Description"
               onChange={handleFormChange}
             />
+            <div className="checkbox-main-container">
+              <div className="checkbox-container">
+                <label className="label-style">M</label>
+                <Checkbox
+                  name="Monday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Monday"
+                  )}
+                />
+              </div>
+              <div className="checkbox-container">
+                <label className="label-style">T</label>
+                <Checkbox
+                  name="Tuesday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Tuesday"
+                  )}
+                />
+              </div>
+              <div className="checkbox-container">
+                <label className="label-style">W</label>
+                <Checkbox
+                  name="Wednesday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Wednesday"
+                  )}
+                />
+              </div>
+              <div className="checkbox-container">
+                <label className="label-style">T</label>
+                <Checkbox
+                  name="Thursday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Thursday"
+                  )}
+                />
+              </div>
+              <div className="checkbox-container">
+                <label className="label-style">F</label>
+                <Checkbox
+                  name="Friday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Friday"
+                  )}
+                />
+              </div>
+              <div className="checkbox-container">
+                <label className="label-style">S</label>
+                <Checkbox
+                  name="Saturday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Saturday"
+                  )}
+                />
+              </div>
+              <div className="checkbox-container">
+                <label className="label-style">S</label>
+                <Checkbox
+                  name="Sunday"
+                  onChange={handleDaysChange}
+                  className="day-select-checkbox"
+                  checked={formData.availability.some(
+                    (avail) => avail?.dayOfWeek === "Sunday"
+                  )}
+                />
+              </div>
+            </div>
             <div className="signup-form-login-btn">
-              <button className="btn">
-                {" "}
-                <a href="succes.html"> Add</a>
+              <button onClick={handleSubmitForm} className="btn">
+                Add
               </button>
             </div>
           </div>

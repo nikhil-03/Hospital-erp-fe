@@ -1,15 +1,7 @@
+import { DataRow } from "../../Interfaces/interfaces";
 import "./CustomDoctorCards.css";
-
-interface DoctorProps {
-  name: string;
-  age: number;
-  specialization: string;
-  experience: number;
-  contact: string;
-}
-
 interface CustomDoctorCardsProps {
-  props: DoctorProps;
+  props: DataRow;
 }
 //const LandingPageCard: React.FC<LandingPageCardProps> = ({
 const CustomDoctorCards: React.FC<CustomDoctorCardsProps> = ({ props }) => {
