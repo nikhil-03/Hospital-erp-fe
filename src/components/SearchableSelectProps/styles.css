@@ -1,0 +1,13 @@
+.custom-select {
+  margin-bottom: 25px;
+  padding: 0 20px 15px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #141e75;
+  outline: none;
+  background-color: #0f044c;
+  color: #fff;
+}
+.css-is6klf-indicatorSeparator {
+  background-color: #0f044c;
+}

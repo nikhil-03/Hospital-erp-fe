@@ -41,3 +41,21 @@ export interface DataRow {
   description: string; // Additional information
   appointments: Appointment[]; // Array of Appointment objects
 }
+export interface OptionType {
+  value: string;
+  label: string;
+}
+export interface Doctor {
+  doctorId: string;
+  name: string;
+  age: number;
+  specialization: string;
+  experience: number;
+  contactNo: string;
+  availability: Availability[];
+  inTiming: string;
+  outTiming: string;
+  email: string;
+  description: string;
+  appointments: (Appointment | string)[];
+}
